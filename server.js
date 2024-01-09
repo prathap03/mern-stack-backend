@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 const User = require("./models/user.model");
 const Order = require("./models/order.model")
 const jwt = require("jsonwebtoken");
-const { jwtDecode } = require("jwt-decode");
 
 const app = express();
 
@@ -29,9 +28,9 @@ let users = {};
 
 io.of("/api/socket").on("connection",(socket)=>{
   console.log("socket.io: User connected: ",socket.id);
-  console.log(socket.handshake.query.token)
-  let user = jwtDecode(socket.handshake.query.token)
-  users[socket.id] = user.name;
+  // console.log(socket.handshake.query.token)
+  // let user = jwtDecode(socket.handshake.query.token)
+  users[socket.id] = "";
   io.of("/api/socket").emit("online",users)
 
 
