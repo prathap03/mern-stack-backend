@@ -34,7 +34,12 @@ io.of("/api/socket").on("connection",(socket)=>{
 
   socket.on("disconnect",()=>{
     console.log("socket.io: User disconnected: ",socket.id)
-    users = users.filter((user)=>user!==socket.id)
+    users = Object.keys(users).reduce((object, key) => {
+      if (key !== socket.id) {
+        object[key] = users[key];
+      }
+      return object;
+    }, {});
     io.of("/api/socket").emit("online",users)  
   })
 }
