@@ -84,7 +84,8 @@ connection.once("open",()=>{
 
 app.post("/api/socketId",async(req,res)=>{
   try{
-    users[req.body.id] = req.body.name;
+    const name = await User.findOne({email:req.body.email})
+    users[req.body.id] = name;
     io.of("/api/socket").emit("online",users)
     res.status(200).json({status:"ok"})
   }catch(err){
