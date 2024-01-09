@@ -92,6 +92,7 @@ connection.once("open",()=>{
 app.post("/api/socketId",async(req,res)=>{
   console.log(req.body)
   try{
+    console.log(users)
     const user = await User.findOne({email:req.body.email})
     console.log(req.body.id,user.name )
     users[req.body.id] = user.name;
