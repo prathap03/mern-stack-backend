@@ -27,7 +27,7 @@ const io = require("socket.io")(server,{
   }
 });
 
-let users;
+let users = [];
 
 io.of("/api/socket").on("connection",(socket)=>{
   console.log("socket.io: User connected: ",socket.id);
