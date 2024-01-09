@@ -28,6 +28,7 @@ let users = {};
 
 io.of("/api/socket").on("connection",(socket)=>{
   console.log("socket.io: User connected: ",socket.id);
+  console.log(socket.hello)
   users[socket.id] = "";
   io.of("/api/socket").emit("online",users)
 
