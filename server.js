@@ -90,9 +90,10 @@ connection.once("open",()=>{
 })
 
 app.post("/api/socketId",async(req,res)=>{
+  console.log(req.body)
   try{
-    const name = await User.findOne({email:req.body.email})
-    users[req.body.id] = name;
+    const user = await User.findOne({email:req.body.email})
+    users[req.body.id] = user.name;
     io.of("/api/socket").emit("online",users)
     res.status(200).json({status:"ok"})
   }catch(err){
