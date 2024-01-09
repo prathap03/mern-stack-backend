@@ -85,7 +85,7 @@ connection.once("open",()=>{
 app.get("/api/getOrders",async(req,res)=>{
   try{
     const data = await Order.find();
-    res.status(200).json(data)
+    res.status(200).json({status:"ok",data:data,users:users})
   }catch(err){
     console.error(err)
     res.status(500).json({status:err})
