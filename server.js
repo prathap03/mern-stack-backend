@@ -37,6 +37,7 @@ io.of("/api/socket").on("connection",(socket)=>{
 
   socket.on("disconnect",()=>{
     console.log("socket.io: User disconnected: ",socket.id)
+    users = users.filter((user)=>user!==socket.id)  
   })
 })
 
