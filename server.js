@@ -51,6 +51,8 @@ io.of("/api/socket").on("connection",(socket)=>{
 
 
 
+
+
 mongoose.connect("mongodb+srv://joeprathap123:joeprathap123@cluster0.qgfc2.mongodb.net/mern-stack");
 
 const connection = mongoose.connection;
@@ -105,6 +107,23 @@ app.post("/api/socketId",async(req,res)=>{
     console.log(err)
     res.status(201).json({status:err})
   } 
+})
+
+app.post("/api/chat",async(req,res)=>{
+  console.log(req.body)
+  try{
+    if(req.body.id){
+      console.log(req.body.id)
+      io.of("/api/socket").to(req.body.id).emit("chat",req.body)
+      res.status(200).json({status:"ok"})
+      return
+    }
+    io.of("/api/socket").emit("chat",req.body)
+    res.status(200).json({status:"ok"})
+  }catch(err){
+    console.log(err)
+    res.status(201).json({status:err})
+  }
 })
 
 app.post("/api/alertAll",async(req,res)=>{
